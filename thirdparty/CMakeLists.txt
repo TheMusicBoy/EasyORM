@@ -59,3 +59,19 @@ if (NOT argparse_POPULATED)
     FetchContent_Populate(argparse)
     add_subdirectory(${argparse_SOURCE_DIR} ${argparse_BINARY_DIR})
 endif()
+
+# -- Lib pqxx --
+
+FetchContent_Declare(libpqxx
+  GIT_REPOSITORY https://github.com/jtv/libpqxx.git
+  GIT_TAG 7.9.0
+)
+
+FetchContent_MakeAvailable(libpqxx)
+FetchContent_GetProperties(libpqxx)
+
+if (NOT libpqxx_POPULATED)
+    FetchContent_Populate(libpqxx)
+    add_subdirectory(${libpqxx_SOURCE_DIR} ${libpqxx_BINARY_DIR})
+endif()
+

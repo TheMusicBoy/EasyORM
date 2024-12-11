@@ -21,11 +21,25 @@ function(generate_proto TARGET_NAME PROTODIR OUTPUTDIR)
         message(STATUS "Building codegen files")
         add_library(${TARGET_NAME} STATIC ${PROTO_OUTPUT})
         target_include_directories(${TARGET_NAME} PUBLIC ${OUTPUTDIR})
-        target_link_libraries(${TARGET_NAME} 
-            # protobuf::libprotobuf
-            # protobuf::libprotobuf-lite
-            # protobuf::libprotoc
-        )
+        target_link_libraries(${TARGET_NAME})
         set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
     endif()
 endfunction()
+
+generate_proto(
+    database_config
+    ${PROTO_ROOT}
+    ${PROTO_ROOT}/generated
+
+    ${PROTO_ROOT}/database_config.proto
+)
+
+generate_proto(
+    config
+    ${PROTO_ROOT}
+    ${PROTO_ROOT}/generated
+
+    ${PROTO_ROOT}/config.proto
+)
+
+target_link_libraries(${TARGET_NAME} database_config)

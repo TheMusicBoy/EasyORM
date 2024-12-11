@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package NProto.NDataBaseConfig;
+
+message TPostgreSqlClientConfig {
+    string dbname = 1;
+    string hostaddr = 2;
+    uint32 port = 3;
+    string user = 4;
+    optional string password = 5;
+    optional string password_env_var = 6;
+};
+
+message TClientConnection {
+    optional string client_name = 1;
+    
+    oneof client_config {
+        TPostgreSqlClientConfig postgresql_client = 2;
+    } 
+};

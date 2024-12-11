@@ -1,3 +1,5 @@
+#include <args.h>
+
 #include <tmb_logs/logging.h>
 #include <tmb_logs/colors.h>
 #include <tmb_logs/exception.h>
@@ -5,7 +7,9 @@
 
 namespace {
 
-auto Logger = NLogging::TLogger("Maintainer");
+////////////////////////////////////////////////////////////////////////////////
+
+auto Logger = NLogging::TLogger("Main");
 
 void InitLogging() {
     auto logging = NLogging::TLoggerPipes::GetInstance();
@@ -21,24 +25,13 @@ void InitLogging() {
     logging->InitFilePipe("logs/myservice/debug.log", {{}});
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 } // namespace
-
-
-struct TArgs {
-    TArgs(int argc, char** argv) {
-        argparse::ArgumentParser program("my_program");
-
-        try {
-            program.parse_args(argc, argv);
-        } catch (std::exception& ex) {
-            LOG_ERROR("Failed to parse arguments. {}", ex.what());
-            std::exit(1);
-        }
-    }
-};
 
 int main(int argc, char** argv) {
     InitLogging();
-    TArgs args(argc, argv);
+    NArgs::TArgs args(argc, argv);
 
+    
 }

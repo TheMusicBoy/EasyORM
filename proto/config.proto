@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "database_config.proto";
+
+package NProto.NConfig;
+
+message TConfig {
+    repeated NProto.NDataBaseConfig.TClientConnection client_connections = 10;
+}
